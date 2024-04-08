@@ -10,18 +10,10 @@ Use the express.Router class to create modular, mountable route handlers. A Rout
 middleware and routing system; for this reason, it is often referred to as a "mini-app". */
 
 const express = require("express");
+const authControllers = require("../controllers/auth-controller");
 const router = express.Router();
 
-// router.get("/", (req, res) => {
-//   res.status(200).send("Welcome to mern stack project");
-// });
-
-router.route("/").get((req, res) => {
-  res.status(200).send("Welcome to mern stack project using by router");
-});
-
-router.route("/register").get((req, res) => {
-  res.status(200).send("Welcome to registration page using by router");
-});
+router.route("/").get(authControllers.home);
+router.route("/register").get(authControllers.register);
 
 module.exports = router;
