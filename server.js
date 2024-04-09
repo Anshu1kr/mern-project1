@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const router = require("./router/auth-router");
+const connectDb = require("./utils/db");
 
 app.use(express.json());
 
@@ -14,6 +15,9 @@ beginning of your middleware stack to ensure it's available for all subsequent r
 app.use("/api/auth", router);
 
 const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`server is running on: ${PORT}`);
+
+connectDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`server is running on: ${PORT}`);
+  });
 });
